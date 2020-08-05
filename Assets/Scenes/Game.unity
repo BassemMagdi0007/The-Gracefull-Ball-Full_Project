@@ -721,6 +721,83 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 368821758}
   m_CullTransparentMesh: 0
+--- !u!1 &389269018
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 389269019}
+  - component: {fileID: 389269021}
+  - component: {fileID: 389269020}
+  m_Layer: 5
+  m_Name: ESC
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &389269019
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 389269018}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1150655353}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 43.799988, y: -28.48}
+  m_SizeDelta: {x: 87.599976, y: 78.2}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &389269020
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 389269018}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 12800000, guid: e087decf5dc525445ad2f41d831abd4e, type: 3}
+    m_FontSize: 35
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 0
+    m_MaxSize: 60
+    m_Alignment: 4
+    m_AlignByGeometry: 1
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: ESC
+--- !u!222 &389269021
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 389269018}
+  m_CullTransparentMesh: 0
 --- !u!1 &430569151
 GameObject:
   m_ObjectHideFlags: 0
@@ -2105,6 +2182,7 @@ RectTransform:
   - {fileID: 338209158}
   - {fileID: 520747340}
   - {fileID: 455852312}
+  - {fileID: 389269019}
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3332,19 +3410,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aaef75fe5894a544f8ff7eafb5831596, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scrollSpeed: 3
+  counter: 0
   ScoreText: {fileID: 368821760}
   gameOverText: {fileID: 338209159}
   restartText: {fileID: 455852313}
   Pause: {fileID: 520747341}
+  Escape: {fileID: 389269020}
   obstacles:
   - {fileID: 5099859231670148501, guid: 30d6ec1db34c1e245b9ccefac7d2979c, type: 3}
   - {fileID: 8713918331224581620, guid: 3edc52661a8997f4896318f7f81e5942, type: 3}
   - {fileID: 7021917215652796210, guid: 2f0f9526650d04646af96dee918e432f, type: 3}
   - {fileID: 6345743556056316360, guid: d025da74ea1fc3a4a8d5d7345c376ae8, type: 3}
   - {fileID: 4308302253247066850, guid: 72adbbecf3dff7e47ade358a09375342, type: 3}
-  scrollSpeed: 3
   obstaclesSpawnPoint: {fileID: 931985263}
-  counter: 0
+  audioSource: {fileID: 127901110}
 --- !u!4 &1962939919
 Transform:
   m_ObjectHideFlags: 0
@@ -3435,6 +3515,7 @@ GameObject:
   - component: {fileID: 2136161192}
   - component: {fileID: 2136161190}
   - component: {fileID: 2136161189}
+  - component: {fileID: 2136161191}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -3458,6 +3539,23 @@ Behaviour:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2136161188}
   m_Enabled: 1
+--- !u!114 &2136161191
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2136161188}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b70ed49a6559eb5459afe6fedbcb6dac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  displacementMap: {fileID: 0}
+  Shader: {fileID: 4800000, guid: 219dd1c79e1652c41ad1a67b9f2f2f34, type: 3}
+  intensity: 0.55
+  flipIntensity: 0.67
+  colorIntensity: 0.37
 --- !u!20 &2136161192
 Camera:
   m_ObjectHideFlags: 0

@@ -9,13 +9,7 @@ public class MoveBackground : MonoBehaviour {
 	public float PontoDeDestino;
 	public float PontoOriginal;
 
-	// Use this for initialization
-	void Start ()
-	{
 
-	}
-	
-	// Update is called once per frame
 	void Update ()
 	{
 		x = transform.position.x;

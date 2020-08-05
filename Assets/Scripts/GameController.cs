@@ -8,23 +8,25 @@ using UnityEngine.SceneManagement;
 public class GameController : MonoBehaviour
 {
     private float Score = 0.0f;
+    private int decimalScore = 0;
+
+    public float scrollSpeed = 10f;
+    public float counter = 0f;
 
     public Text ScoreText;
     public Text gameOverText;
     public Text restartText;
     public Text Pause;
+    public Text Escape;
 
     public GameObject[] obstacles;
-    public float scrollSpeed = 10f;
     public Transform obstaclesSpawnPoint;
     public AudioSource audioSource;
-    public float counter = 0f;
 
     public static bool gameOver;
     private bool restart;
 
 
-    // Start is called before the first frame update
     void Start()
     {
         gameOver = false;
@@ -35,25 +37,51 @@ public class GameController : MonoBehaviour
         Pause.text = "";
 
         Time.timeScale = 1;
+        Camera.main.GetComponent<GlitchEffect>().enabled = false;
+
+        audioSource.mute = false;
 
         GenerateObstacles();
     }
 
-    // Update is called once per frame
     void Update()
     {
+        Debug.Log(Score);
+        if (Score >= 71.0f)
+        {
+            Camera.main.GetComponent<GlitchEffect>().enabled = true;
+        }
+
+
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            SceneManager.LoadScene(0);
+            if (PlayerPrefs.GetInt("HighScore") < decimalScore)
+            {
+                PlayerPrefs.SetInt("HighScore", decimalScore);
+            }
+
+            if (gameOver != true)
+                SceneManager.LoadScene(0);
         }
             
         if (restart)
         {
             if (Input.GetKeyDown(KeyCode.R))
             {
+                if (PlayerPrefs.GetInt("HighScore") < decimalScore)
+                {
+                    PlayerPrefs.SetInt("HighScore", decimalScore);
+                }
+
+                Score = 0;
+                ScoreText.text = "Score : " + ((int)Score).ToString();
+
                 Application.LoadLevel(Application.loadedLevel);
             }
         }
+
+        Score += 1 * Time.deltaTime;
+        decimalScore = Mathf.RoundToInt(Score);
 
         Score += Time.deltaTime;
         ScoreText.text = "Score : " + ((int)Score).ToString();
@@ -104,15 +132,16 @@ public class GameController : MonoBehaviour
         currentObstcle.transform.position += Vector3.left * scrollSpeed * Time.deltaTime;
     }
 
-    
     public void EndGame()
     {
         if(gameOver == true)
         {
             gameOverText.text = "Game Over";
             restartText.text = "Press 'R' To Restart";
+            Escape.text = "";
             Time.timeScale = 0;
             restart = true;
+            audioSource.mute = true;
         }
     }
 }
