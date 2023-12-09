@@ -1,3 +1,1 @@
-All the scripts , assets & VFX needed to start the sky voyager game.
-
-Unity version required to launch the project 2019.2.8f1 or higher.
+Embark on a thrilling journey with Sky Voyager, a captivating game project ready for launch. This package includes all the essential scripts, assets, and stunning visual effects (VFX) needed to kickstart your gaming adventure. Ensure a smooth start by using Unity version 2019.2.8f1 or higher to unlock the full potential of this exciting gaming experience."
